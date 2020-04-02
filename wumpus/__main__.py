@@ -1,6 +1,7 @@
 from wumpus.apps.core.models import GameBoard
-from wumpus.apps.core.services import GameBoardService
+from wumpus.apps.core.services import GameBoardService, HunterService, PerceptionService
 from wumpus.apps.common.util import InfoException, Constants
+import wumpus.config as config
 
 
 class App:
@@ -8,48 +9,45 @@ class App:
         self.game_board: GameBoard = GameBoard()
 
     def __initialize(self):
-        GameBoardService.load_board(self.game_board)
+        GameBoardService.load_game(self.game_board)
 
     def run_game(self):
-        self.__initialize()
-        quit_game = False
-        while not quit_game:
-            print("##########################################")
-            print("               · wumpus ·                 ")
-            print("##########################################")
-            print("1. Avanzar")
-            print("2. Girar 90º izquierda")
-            print("3. Girar 90º derecha")
-            print("4. Lanzar flecha")
-            print("5. Escapar con el oro (si estas en la casilla de salida)")
-            print("6. Quitar")
-            print("7. Mostrar tablero (DEBUG)")
-            print("------------------------------------------")
-            print("Posicion actual del cazador: %s")
-            print("Dirección actual del cazador: %s")
-            print("Percepciones actuales: %s")
-            choice = int(input("### Elige opción: "))
-            if choice == Constants.OPTION_MENU_GO:
-                pass
-            elif choice == Constants.OPTION_MENU_ROTATE_90_DEGREES_LEFT:
-                pass
-            elif choice == Constants.OPTION_MENU_ROTATE_90_DEGREES_RIGHT:
-                pass
-            elif choice == Constants.OPTION_MENU_THROW_ARROW:
-                pass
-            elif choice == Constants.OPTION_MENU_OUT_WIN:
-                pass
-            elif choice == Constants.OPTION_MENU_QUIT_GAME:
-                print("FIN. Gracias por jugar")
-                quit_game = True
-            elif choice == 7:
-                GameBoardService.show_game_board(self.game_board)
-            else:
-                print("Elección incorrecta")
-
-
-def second_menu():
-    print("This is the second menu")
+        try:
+            self.__initialize()
+            quit_game = False
+            message = None
+            while not quit_game:
+                print("##########################################")
+                print("               · wumpus ·                 ")
+                print("##########################################")
+                if not config.HIDE_BOARD:
+                    GameBoardService.show_game_board(self.game_board)
+                print("------------------------------------------")
+                print("Opciones:")
+                print("1. Avanzar")
+                print("2. Girar 90º izquierda")
+                print("3. Girar 90º derecha")
+                print("4. Lanzar flecha")
+                print("5. Escapar con el oro (si estas en la casilla de salida)")
+                print("6. Quitar")
+                print("------------------------------------------")
+                print("Posicion actual del cazador: (%s, %s)" % (self.game_board.hunter.row,
+                                                                 self.game_board.hunter.column))
+                print("Dirección actual del cazador: %s" % HunterService.get_ascii_direction(self.game_board.hunter))
+                print("Nº flechas del cazador: %s" % self.game_board.hunter.n_arrows)
+                print("Percepciones actuales: %s" % str(PerceptionService.get_perceptions(self.game_board)))
+                if message:
+                    print("-->   %s   <--" % message)
+                current_input = input("### Elige opción: ").strip()
+                if current_input:
+                    choice = int(current_input)
+                else:
+                    choice = 1
+                quit_game, message = GameBoardService.manage_option(choice, self.game_board)
+            if message:
+                print("-->   %s   <--" % message)
+        except InfoException as e:
+            print("ERROR: %s" % str(e))
 
 
 if __name__ == '__main__':
