@@ -207,7 +207,7 @@ class PerceptionService(IPerception):
         elif hunter.direction == Constants.DIRECTION_LEFT:
             if wumpus.row == hunter.row and hunter.column > wumpus.column:
                 wumpus_scream = True
-        elif hunter.direction == Constants.DIRECTION_RIGHT and hunter.row == config.N_BOARD_CELLS-1:
+        elif hunter.direction == Constants.DIRECTION_RIGHT:
             if wumpus.row == hunter.row and hunter.column < wumpus.column:
                 wumpus_scream = True
         return wumpus_scream
