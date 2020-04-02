@@ -6,13 +6,13 @@ import wumpus.config as config
 
 class App:
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.game_board: GameBoard = GameBoard()
 
-    def __initialize(self):
+    def __initialize(self) -> None:
         GameBoardService.load_game(self.game_board)
 
-    def run_game(self):
+    def run_game(self) -> None:
         try:
             self.__initialize()
             quit_game = False

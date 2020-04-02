@@ -2,7 +2,7 @@ from typing import List
 
 
 class GameBoard:
-    def __init__(self):
+    def __init__(self) -> None:
         self.size: int = 0
         self.water_well_list: List[BoardElement] = list()
         self.wumpus: Wumpus = Wumpus()
@@ -12,13 +12,13 @@ class GameBoard:
 
 
 class BoardElement:
-    def __init__(self):
+    def __init__(self) -> None:
         self.row: int = 0
         self.column: int = 0
 
 
 class Hunter(BoardElement):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.n_arrows: int = 0
         self.direction: int = 0
@@ -27,6 +27,6 @@ class Hunter(BoardElement):
 
 
 class Wumpus(BoardElement):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
         self.is_dead: bool = False

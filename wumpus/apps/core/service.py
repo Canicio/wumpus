@@ -196,7 +196,7 @@ class PerceptionService(IPerception):
         return shock
 
     @staticmethod
-    def is_there_wumpus_scream(hunter: Hunter, wumpus: Wumpus):
+    def is_there_wumpus_scream(hunter: Hunter, wumpus: Wumpus) -> bool:
         wumpus_scream = False
         if hunter.direction == Constants.DIRECTION_UP:
             if wumpus.column == hunter.column and hunter.row > wumpus.row:

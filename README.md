@@ -11,7 +11,7 @@ N_BOARD_CELLS = 8
 N_WATER_WELL = 3
 N_ARROWS = 5
 ```
-Para mostrar el tablero y sus elementos (pozos, oro, etc) cada vez que se ejecute una acción indicar `HIDE_BOARD = False`. En el caso de querer jugar guiándose solo por las percepcciones inidicar `HIDE_BOARD = True`
+Para mostrar el tablero y sus elementos (pozos, oro, etc) cada vez que se ejecute una acción indicar `HIDE_BOARD = False`. En el caso de querer jugar guiándose solo por las percepciones indicar `HIDE_BOARD = True`
 ```text
 ...
 HIDE_BOARD = False
