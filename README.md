@@ -1,10 +1,28 @@
 wumpus
 ======
 
-A simple test designed for the interview process at Connected Health Services. 
+### Requerimientos
+* Python 3.6.2+ (recomendado usar virtualenv)
 
-Please fork this repo in your account and develop a Java program that implements the rules for the Wumpus Game (see included Powerpoint). You are expected to write the complete game logic, and use simple text interactions to drive the game play (like the text-based adventure games from the old days, http://en.wikipedia.org/wiki/Text-based_game).
+### Configuración
+Fichero config.py. Por ejemplo, para jugar sobre un tablero de 8x8, con 3 pozos y 5 flechas:
+```text
+N_BOARD_CELLS = 8
+N_WATER_WELL = 3
+N_ARROWS = 5
+```
+Para mostrar el tablero y sus elementos (pozos, oro, etc) cada vez que se ejecute una acción indicar `HIDE_BOARD = False`. En el caso de querer jugar guiándose solo por las percepcciones inidicar `HIDE_BOARD = True`
+```text
+...
+HIDE_BOARD = False
+```
 
-Bonus points for unit tests ;).
+### Ejecutar
+```bash
+$ python -m wumpus
+```
 
-Please use Eclipse as your IDE and whatever version of Java you are most confortable with (Scala or Groovy also welcomed). Use whatever framework you prefer for your unit tests.
+### Ejecutar tests
+```bash
+$ python -m unittest -v
+```
