@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 from typing import List, Tuple
-
 from wumpus.apps.core.model import GameBoard, Hunter, Wumpus, BoardElement
 
 
