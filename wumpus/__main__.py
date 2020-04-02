@@ -1,10 +1,11 @@
-from wumpus.apps.core.models import GameBoard
-from wumpus.apps.core.services import GameBoardService, HunterService, PerceptionService
-from wumpus.apps.common.util import InfoException, Constants
+from wumpus.apps.core.model import GameBoard
+from wumpus.apps.core.service import GameBoardService, HunterService, PerceptionService
+from wumpus.apps.common.util import InfoException
 import wumpus.config as config
 
 
 class App:
+
     def __init__(self):
         self.game_board: GameBoard = GameBoard()
 
