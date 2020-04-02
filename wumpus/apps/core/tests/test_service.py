@@ -13,7 +13,7 @@ class GameBoardServiceTest(unittest.TestCase):
         self.wumpus = TestHelper.get_wumpus()
         self.wumpus_dead = TestHelper.get_wumpus(dead=True)
 
-    @mock.patch('wumpus.apps.core.service.PerceptionService.is_hunter_in_element_position')
+    @mock.patch('wumpus.apps.core.service.HunterService.is_hunter_in_element_position')
     def test_is_hunter_hunted_by_wumpus_when_wumpus_is_dead(self, mocked_is_hunter_in_element_position_method: Mock) \
             -> None:
 
@@ -27,7 +27,7 @@ class GameBoardServiceTest(unittest.TestCase):
         mocked_is_hunter_in_element_position_method.assert_not_called()
         self.assertEqual(False, result)
 
-    @mock.patch('wumpus.apps.core.service.PerceptionService.is_hunter_in_element_position')
+    @mock.patch('wumpus.apps.core.service.HunterService.is_hunter_in_element_position')
     def test_is_hunter_hunted_by_wumpus_when_they_both_same_position(
             self, mocked_is_hunter_in_element_position_method: Mock) -> None:
 
@@ -41,7 +41,7 @@ class GameBoardServiceTest(unittest.TestCase):
         mocked_is_hunter_in_element_position_method.assert_called_once()
         self.assertEqual(True, result)
 
-    @mock.patch('wumpus.apps.core.service.PerceptionService.is_hunter_in_element_position')
+    @mock.patch('wumpus.apps.core.service.HunterService.is_hunter_in_element_position')
     def test_is_hunter_hunted_by_wumpus_when_they_have_different_position(
             self, mocked_is_hunter_in_element_position_method: Mock) -> None:
 

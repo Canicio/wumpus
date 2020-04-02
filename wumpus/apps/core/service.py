@@ -128,25 +128,25 @@ class GameBoardService(IGameBoard):
         if wumpus.is_dead:
             return False
         else:
-            return PerceptionService.is_hunter_in_element_position(hunter, wumpus)
+            return HunterService.is_hunter_in_element_position(hunter, wumpus)
 
     @staticmethod
     def has_hunter_fallen_into_water_well(hunter: Hunter, water_well_list: List[BoardElement]) -> bool:
         fallen = False
         for water_well in water_well_list:
-            if PerceptionService.is_hunter_in_element_position(hunter, water_well):
+            if HunterService.is_hunter_in_element_position(hunter, water_well):
                 fallen = True
                 break
         return fallen
 
     @staticmethod
     def has_hunter_found_the_gold(hunter: Hunter, gold: BoardElement) -> bool:
-        return PerceptionService.is_hunter_in_element_position(hunter, gold)
+        return HunterService.is_hunter_in_element_position(hunter, gold)
 
     @staticmethod
     def can_hunter_escape(hunter: Hunter, outlet: BoardElement) -> bool:
         if hunter.gold_caught:
-            return PerceptionService.is_hunter_in_element_position(hunter, outlet)
+            return HunterService.is_hunter_in_element_position(hunter, outlet)
         else:
             return False
 
@@ -222,13 +222,6 @@ class PerceptionService(IPerception):
             return False
 
     @staticmethod
-    def is_hunter_in_element_position(hunter: Hunter, board_element: BoardElement) -> bool:
-        if board_element.row == hunter.row and board_element.column == hunter.column:
-            return True
-        else:
-            return False
-
-    @staticmethod
     def get_perceptions(game_board: GameBoard) -> List[str]:
         perception_list: List[str] = list()
         if not game_board.wumpus.is_dead and PerceptionService.is_there_wumpus_stench(game_board.hunter,
@@ -286,6 +279,13 @@ class HunterService(IHunter):
     def throw_arrow(hunter: Hunter) -> None:
         if hunter.n_arrows > 0:
             hunter.n_arrows -= 1
+
+    @staticmethod
+    def is_hunter_in_element_position(hunter: Hunter, board_element: BoardElement) -> bool:
+        if board_element.row == hunter.row and board_element.column == hunter.column:
+            return True
+        else:
+            return False
 
     @staticmethod
     def get_ascii_direction(hunter: Hunter) -> str:

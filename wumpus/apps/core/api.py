@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
-from typing import List
+from typing import List, Tuple
+
 from wumpus.apps.core.model import GameBoard, Hunter, Wumpus, BoardElement
 
 
@@ -172,6 +173,16 @@ class IHunter(metaclass=ABCMeta):
 
     @staticmethod
     @abstractmethod
+    def is_hunter_in_element_position(hunter: Hunter, board_element: BoardElement) -> bool:
+        """
+        Is hunter in element position?
+        :param hunter: Hunter object
+        :param board_element: BoardElement object
+        :return: boolean answer to the question
+        """
+
+    @staticmethod
+    @abstractmethod
     def get_ascii_direction(hunter: Hunter) -> str:
         """
         Get ascii representation of hunter direction
@@ -188,4 +199,13 @@ class IBoardElement(metaclass=ABCMeta):
         Get position of board element
         :param board_element: BoardElement object
         :return: tuple (raw, column)
+        """
+
+    @staticmethod
+    @abstractmethod
+    def get_position_tuple_list(board_element_list: List[BoardElement]) -> List[Tuple]:
+        """
+        Get positions list of board elements list
+        :param board_element_list: list of BoardElement objects
+        :return: list of positions represented by tuples
         """
